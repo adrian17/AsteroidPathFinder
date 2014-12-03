@@ -11,11 +11,10 @@ XY getRandXY(){
 	int y = dist(engine, y_range);
 	return { x, y };
 }
-#include<iostream>
+
 Map::Map()
 {
 	generate();
-
 }
 
 void Map::generate(){
@@ -27,9 +26,6 @@ void Map::generate(){
 	int sz = ROWS * COLUMNS;
 	int asteroids = (int)(sz * 0.10);
 	int gravity_wells = (int)(sz * 0.05);
-
-	std::cout << sz<<" ";
-	std::cout << asteroids;
 
 	for (int i = 0; i < asteroids; ){
 		XY xy = getRandXY();

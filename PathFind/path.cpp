@@ -3,7 +3,6 @@
 #include <algorithm>
 #include <iostream>
 
-bool comp_mode = false;
 heuteristics_mode dist_mode = EUCLIDAN;
 
 double dist_euclidan(XY xy, XY xy2){
