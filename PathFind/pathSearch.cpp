@@ -61,12 +61,11 @@ bool Solver::step(bool &success){
 
 		PathObj newPath;
 		newPath.vec = path;
-		newPath.vec.push_back(newHead);
+		newPath.distToEnd = heuteristics_dist(newHead, goalXY);
+		newPath.vec.emplace_back(newHead);
 		newPath.length = total_length(newPath.vec);
 
-		newPath.distToEnd = heuteristics_dist(newHead, goalXY);
-
-		paths.insert(naive_lower_bound(paths.begin(), paths.end(), newPath), newPath);
+		paths.insert(naive_lower_bound(paths.begin(), paths.end(), newPath), std::move(newPath));
 	}
 
 	return false;
