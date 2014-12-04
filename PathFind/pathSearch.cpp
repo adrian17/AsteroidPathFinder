@@ -2,17 +2,6 @@
 
 #include "pathSearch.h"
 
-template<typename Iterator, typename Val>
-Iterator naive_lower_bound(Iterator begin, Iterator end, const Val &val){
-	auto it = begin;
-	while (it != end){
-		if (!(*it < val))
-			break;
-		it++;
-	}
-	return it;
-}
-
 XY dirs[] = {
 	{ -1, -1 },	{ -1, 0 },	{ -1, 1 },
 	{ 0, -1 },				{ 0, 1 },
@@ -65,7 +54,7 @@ bool Solver::step(bool &success){
 		newPath.vec.emplace_back(newHead);
 		newPath.length = total_length(newPath.vec);
 
-		paths.insert(naive_lower_bound(paths.begin(), paths.end(), newPath), std::move(newPath));
+		paths.insert(std::lower_bound(paths.begin(), paths.end(), newPath), std::move(newPath));
 	}
 
 	return false;

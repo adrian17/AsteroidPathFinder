@@ -19,7 +19,7 @@ public:
 		goalXY = map.getGoal();
 
 		paths.clear();
-		paths.push_back({ 0, 0, { startXY } });
+		paths.emplace_back(startXY);
 	}
 
 	void solve(bool &success);
@@ -41,5 +41,5 @@ private:
 	XY goalXY;
 
 	std::unordered_set<XY> traversed;
-	std::list<PathObj> paths;
+	std::vector<PathObj> paths;
 };

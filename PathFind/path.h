@@ -33,6 +33,20 @@ struct PathObj
 	double length, distToEnd;
 	Path vec;
 
+	PathObj(){}
+	PathObj(XY xy) : vec({ xy })
+		{}
+
+	PathObj(PathObj&& rhs) : length(rhs.length), distToEnd(rhs.distToEnd), vec(std::move(rhs.vec))
+		{}
+
+	PathObj& operator=(PathObj&& rhs){
+		length = rhs.length;
+		distToEnd = rhs.distToEnd;
+		vec = std::move(rhs.vec);
+		return *this;
+	}
+
 	bool operator<(const PathObj &p2) const {
 		return this->length + this->distToEnd >= p2.length + p2.distToEnd;
 	}
