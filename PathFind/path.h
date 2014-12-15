@@ -37,6 +37,9 @@ struct PathObj
 	PathObj(XY xy) : vec({ xy })
 		{}
 
+	PathObj(const PathObj& rhs) : length(rhs.length), distToEnd(rhs.distToEnd), vec(rhs.vec)
+		{}
+
 	PathObj(PathObj&& rhs) : length(rhs.length), distToEnd(rhs.distToEnd), vec(std::move(rhs.vec))
 		{}
 

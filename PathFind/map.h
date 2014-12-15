@@ -15,7 +15,7 @@ enum Tile
 	Goal
 };
 
-const std::unordered_map<Tile, std::array<int, 3>> colors = {
+const std::unordered_map<Tile, std::array<int, 3>, std::hash<int>> colors = {
 	{ Empty, { 128, 128, 128 } },
 	{ Asteroid, { 128, 32, 32 } },
 	{ GravityWell, {32, 32, 32} },

@@ -1,6 +1,7 @@
 #include "world.h"
 
 #include <string>
+#include <algorithm>
 
 World::World() :
 	solver(map)
