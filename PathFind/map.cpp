@@ -3,7 +3,8 @@
 #include <random>
 
 XY getRandXY(){
-	static std::mt19937 engine((std::random_device()()));
+	static std::random_device device;
+	static std::mt19937 engine(device());
 	static std::uniform_int_distribution<unsigned long> dist;
 	static std::uniform_int_distribution<unsigned long>::param_type x_range(0, COLUMNS - 1);
 	static std::uniform_int_distribution<unsigned long>::param_type y_range(0, ROWS-1);
