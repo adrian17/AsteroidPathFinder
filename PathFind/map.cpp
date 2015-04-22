@@ -19,10 +19,7 @@ Map::Map()
 }
 
 void Map::generate(){
-	map.clear();
-
-	map[getRandXY()] = Start;
-	map[getRandXY()] = Goal;
+	clear();
 
 	int sz = ROWS * COLUMNS;
 	int holes = (int)(sz * 0.10);
@@ -34,6 +31,13 @@ void Map::generate(){
 		map[xy] = Sinkhole;
 		i++;
 	}
+}
+
+void Map::clear(){
+	map.clear();
+
+	map[getRandXY()] = Start;
+	map[getRandXY()] = Goal;
 }
 
 Tile Map::getTile(int x, int y){

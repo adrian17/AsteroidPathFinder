@@ -3,9 +3,9 @@
 #include "pathSearch.h"
 
 XY dirs[] = {
-	{ -1, -1 },	{ -1, 0 },	{ -1, 1 },
+				{ -1, 0 },
 	{ 0, -1 },				{ 0, 1 },
-	{ 1, -1 },	{ 1, 0 },	{ 1, 1 }
+				{ 1, 0 },
 };
 
 void Solver::solve(bool &success){

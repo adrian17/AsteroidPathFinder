@@ -39,6 +39,11 @@ void World::handleKeyboard(int key){
 		solver.reset();
 		success = false; finished = false;
 	}
+	if (key == SDLK_c) {
+		map.clear();
+		solver.reset();
+		success = false; finished = false;
+	}
 }
 
 void World::update(){

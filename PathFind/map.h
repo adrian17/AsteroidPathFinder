@@ -28,6 +28,7 @@ public:
 	Map();
 
 	void generate();
+	void clear();
 
 	XY getStart(){
 		for (auto& kv : map)
