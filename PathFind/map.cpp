@@ -25,32 +25,20 @@ void Map::generate(){
 	map[getRandXY()] = Goal;
 
 	int sz = ROWS * COLUMNS;
-	int asteroids = (int)(sz * 0.10);
-	int gravity_wells = (int)(sz * 0.05);
+	int holes = (int)(sz * 0.10);
 
-	for (int i = 0; i < asteroids; ){
+	for (int i = 0; i < holes; ){
 		XY xy = getRandXY();
 		if (getTile(xy) != Empty)
 			continue;
-		map[xy] = Asteroid;
-		i++;
-	}
-	for (int i = 0; i < gravity_wells; ){
-		XY xy = getRandXY();
-		if (getTile(xy) != Empty)
-			continue;
-		for (int x = -1; x <= 1; ++x)
-			for (int y = -1; y <= 1; ++y)
-				if (getTile(xy.first+x, xy.second+y) == Empty)
-					map[{xy.first+x, xy.second+y}] = Gravity;
-		map[xy] = GravityWell;
+		map[xy] = Sinkhole;
 		i++;
 	}
 }
 
 Tile Map::getTile(int x, int y){
 	if (x < 0 || y < 0 || x >= COLUMNS || y >= ROWS)
-		return Asteroid;
+		return Sinkhole;
 	if (map.find({ x, y }) == map.end())
 		return Empty;
 	return map[{x, y}];

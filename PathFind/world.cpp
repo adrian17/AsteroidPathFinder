@@ -14,8 +14,8 @@ void World::handleMouseClick(int x, int y, bool first_click){
 	if (first_click)
 		currentMode = tile;
 	if (tile == Empty && currentMode == Empty)
-		map.setTile(tileX, tileY, Asteroid);
-	else if (tile == Asteroid && currentMode == Asteroid)
+		map.setTile(tileX, tileY, Sinkhole);
+	else if (tile == Sinkhole && currentMode == Sinkhole)
 		map.setTile(tileX, tileY, Empty);
 	success = false;
 	solver.reset();
@@ -55,9 +55,17 @@ void World::draw(SDL_Window *window, SDL_Renderer *ren){
 	float sw = 800 / COLUMNS;
 	float sh = 600 / ROWS;
 
-	const PathObj pathObj = solver.getCurrentPath();
-	const Path path = pathObj.vec;
+	PathObj pathObj = solver.getCurrentPath();
+	Path &path = pathObj.vec;
 	const auto &traversed = solver.getTraversed();
+
+	int sz = path.size();
+	for (int i = 0; i < sz; ++i) {
+		auto xy = path[i];
+		path.emplace_back(xy.first + 1, xy.second);
+		path.emplace_back(xy.first, xy.second + 1);
+		path.emplace_back(xy.first + 1, xy.second + 1);
+	}
 
 	SDL_SetWindowTitle(window, std::to_string(pathObj.length).c_str());
 
@@ -72,11 +80,10 @@ void World::draw(SDL_Window *window, SDL_Renderer *ren){
 			int r = rgb[0], g = rgb[1], b = rgb[2];
 
 			if (tile == Empty)
-				if (traversed.count({ x, y }) == 1)
-					if (std::find(path.begin(), path.end(), XY(x, y)) != path.end())
-						g += 120;
-					else
-						g += 60;
+				if (std::find(path.begin(), path.end(), XY(x, y)) != path.end())
+					g += 120;
+				else if (traversed.count({ x, y }) == 1)
+					g += 60;
 
 			SDL_SetRenderDrawColor(ren, r, g, b, 255);
 

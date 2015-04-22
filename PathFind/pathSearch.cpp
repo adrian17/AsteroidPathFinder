@@ -21,7 +21,11 @@ bool Solver::step(bool &success){
 	Path &path = pathObj.vec;
 	XY head = path.back();
 
-	if (map.getTile(head) == Goal){
+	if (map.getTile(head) == Goal ||
+		map.getTile({ head.first + 1, head.second }) == Goal ||
+		map.getTile({ head.first, head.second + 1 }) == Goal ||
+		map.getTile({ head.first + 1, head.second + 1 }) == Goal)
+	{
 		success = true;
 		return true;
 	}
@@ -36,8 +40,10 @@ bool Solver::step(bool &success){
 		if (traversed.find(newHead) != traversed.end())
 			continue;
 
-		auto tileOnHead = map.getTile(newHead);
-		if (tileOnHead == Asteroid || tileOnHead == GravityWell || tileOnHead == Gravity)
+		if (map.getTile(newHead) == Sinkhole ||
+			map.getTile({newHead.first + 1, newHead.second}) == Sinkhole ||
+			map.getTile({newHead.first, newHead.second + 1}) == Sinkhole ||
+			map.getTile({newHead.first + 1, newHead.second + 1}) == Sinkhole)
 			continue;
 
 		auto other = std::find_if(paths.begin(), paths.end(),

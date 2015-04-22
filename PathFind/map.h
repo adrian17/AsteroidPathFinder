@@ -8,18 +8,14 @@
 enum Tile
 {
 	Empty,
-	Asteroid,
-	GravityWell,
-	Gravity,
+	Sinkhole,
 	Start,
 	Goal
 };
 
 const std::unordered_map<Tile, std::array<int, 3>, std::hash<int>> colors = {
 	{ Empty, { 128, 128, 128 } },
-	{ Asteroid, { 128, 32, 32 } },
-	{ GravityWell, {32, 32, 32} },
-	{ Gravity, {0, 0, 0} },
+	{ Sinkhole, {0, 0, 0} },
 	{ Start, { 0, 0, 255 } },
 	{ Goal, { 0, 0, 255 } }
 };
